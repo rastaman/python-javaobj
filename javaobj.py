@@ -368,15 +368,6 @@ class JavaByteArray(JavaObject):
     def __len__(self):
         return len(self._data)
 
-class ByteArrayDesc(object):
-    
-    def __init__(self):
-        self.name='[B'
-        self.serialVersionUID=-5984413125824719648
-        self.fields_names=[]
-        self.fields_types=[]
-        self.flags = 0x2
-        self.superclass=None
 
 # ------------------------------------------------------------------------------
 
@@ -1637,3 +1628,14 @@ class DefaultObjectTransformer(object):
 
             log_debug(">>> java_object: {0}".format(java_object))
             return java_object
+
+
+class ByteArrayDesc(object):
+
+    def __init__(self):
+        self.name =  JavaObjectConstants.TYPE_ARRAY + JavaObjectConstants.TYPE_BYTE
+        self.serialVersionUID = -5984413125824719648
+        self.fields_names = []
+        self.fields_types = []
+        self.flags = JavaObjectConstants.SC_SERIALIZABLE
+        self.superclass = None
