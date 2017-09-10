@@ -368,6 +368,16 @@ class JavaByteArray(JavaObject):
     def __len__(self):
         return len(self._data)
 
+class ByteArrayDesc(object):
+    
+    def __init__(self):
+        self.name='[B'
+        self.serialVersionUID=-5984413125824719648
+        self.fields_names=[]
+        self.fields_types=[]
+        self.flags = 0x2
+        self.superclass=None
+
 # ------------------------------------------------------------------------------
 
 
@@ -1199,7 +1209,7 @@ class JavaObjectMarshaller(JavaObjectConstants):
         :raise RuntimeError: Unsupported type
         """
         log_debug("Writing object of type {0}".format(type(obj).__name__))
-        if isinstance(obj, JavaArray):
+        if isinstance(obj, (JavaArray, JavaByteArray)):
             # Deserialized Java array
             self.write_array(obj)
         elif isinstance(obj, JavaEnum):
